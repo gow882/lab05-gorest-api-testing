@@ -22,7 +22,7 @@ jobs:
 
       - name: Run Monitor for GET Users (< 800ms)
         run: |
-          newman run Collection.json \
-            -e Environment.json \
+          newman run "2474802010317_NguyenTrongPhuc_GoRest.postman_collection.json" \
+            -e "2474802010317_NguyenTrongPhuc_GoRest_Env.postman_environment.json" \
             --env-var "token=${{ secrets.GOREST_TOKEN }}" \
             --reporters cli
