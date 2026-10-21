@@ -24,5 +24,6 @@ jobs:
         run: |
           newman run "2474802010317_NguyenTrongPhuc_GoRest.postman_collection.json" \
             -e "2474802010317_NguyenTrongPhuc_GoRest_Env.postman_environment.json" \
+            -d user.csv \
             --env-var "token=${{ secrets.GOREST_TOKEN }}" \
             --reporters cli
