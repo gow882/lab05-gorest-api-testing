@@ -1,0 +1,28 @@
+name: GoRest API Monitor
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Chạy tự động mỗi giờ một lần
+  workflow_dispatch: # Cho phép bấm chạy thủ công trên GitHub
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run Monitor for GET Users (< 800ms)
+        run: |
+          newman run Collection.json \
+            -e Environment.json \
+            --env-var "token=${{ secrets.GOREST_TOKEN }}" \
+            --reporters cli
